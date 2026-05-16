@@ -101,5 +101,7 @@ USER root
 
 WORKDIR /app
 
+EXPOSE 3000
+
 ENTRYPOINT ["/app/entrypoint.sh"]
-CMD ["uvicorn", "openhands.server.listen:app", "--host", "0.0.0.0", "--port", "3000"]
+CMD ["sh", "-c", "exec uvicorn openhands.server.listen:app --host 0.0.0.0 --port \"${PORT:-3000}\""]
