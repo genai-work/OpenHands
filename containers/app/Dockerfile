@@ -104,4 +104,6 @@ WORKDIR /app
 EXPOSE 3000
 
 ENTRYPOINT ["/app/entrypoint.sh"]
+RUN /app/.venv/bin/pip install playwright \
+    && /app/.venv/bin/python -m playwright install --with-deps chromium
 CMD ["sh", "-c", "exec uvicorn openhands.server.listen:app --host 0.0.0.0 --port \"${PORT:-3000}\""]
